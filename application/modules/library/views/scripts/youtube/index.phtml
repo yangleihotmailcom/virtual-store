@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+     <title>Demo</title>
+     <link type="text/css" rel="stylesheet" media="screen" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+
+     <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+     
+     <link type="text/css" rel="stylesheet" media="screen" href="/js/jquery/css/smoothness/jquery-ui-1.8.20.custom.css">
+     <script src="/js/jquery/js/jquery-ui-1.8.20.custom.min.js" type="text/javascript"></script>     
+     
+<!-- <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js'></script> -->
+     <script src="/js/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+     
+     
+     <style type="text/css">
+      
+         * { margin : 0px; padding: 0px; }
+         
+         body {
+       /*   background-color: #222222; */
+          margin: 40px;
+         }
+         
+         div.main
+         {
+            background: url("/images/filmstrip_tile.png") repeat-y scroll 0 0 #000000;
+            border: 2px solid #444444;
+            border-radius: 10px 10px 10px 10px;
+            padding: 25px 0 25px 115px;
+           	border-radius: 10px;
+	        -moz-border-radius: 10px;
+	        -webkit-border-radius: 10px;
+         }
+         
+         a.videoLink 
+         {
+		    background: none no-repeat scroll 0 0 transparent;
+		    border: 1px solid #000000;
+		    cursor: pointer;
+		    display: block;
+		    float: left;
+		    height: 140px;
+		    margin: 0 15px 15px 0;
+		    padding: 0;
+		    position: relative;
+		    width: 200px;
+		  }
+		  
+		  div.clear_both
+		  {
+		     clear: both;
+		     line-height: 1px;
+		  }
+		  
+          a.videoLink img.play { position: absolute; top: 25px; left: 75px; }
+          a.videoLink div.caption {
+	                position: absolute; 
+	                width: 200px; 
+	                bottom: 0px; 
+	                padding: 15px 10px 10px 15px; 
+	                color: #fff; 
+	                background-color: rgba(0,0,0,.5);
+	                font-family: Arial; 
+	                font-size: 16px;
+	      }    
+	      
+	      #tabs-1 > dl > dt { font-size: 16px; font-weight: bold; }
+	      #tabs-1 > dl > dd { font-size: 14px; margin-left : 5px; margin-bottom: 5px;}	      
+
+	      #tabs-1 > dl > dt { font-size: 16px; font-weight: bold; }
+	      #tabs-1 > dl > dd > dl { margin-top : 5px; }	      
+	      #tabs-1 > dl > dd > dl > dt { font-size: 12px; font-weight: bold; float : left }	      
+	      #tabs-1 > dl > dd > dl > dd { font-size: 12px; margin-left : 150px; }	
+	      
+	      #tabs-2,#tabs-3,#tabs-4,#tabs-5,#tabs-6
+	      {
+	         line-height: 20px;
+	      }
+	      
+	      #intro
+	      {
+	         margin-top: 20px;
+	      }
+	      
+     </style>     
+     <script type="text/javascript">
+           $(document).ready( function () {
+               $('a.videoLink').css({ "background-image": "url('/images/demopage.png')"})
+                               .click( function (){
+                                    var youtubeId = $(this).attr('youtube');
+                                    var href = "http://www.youtube.com/v/" + youtubeId ;
+                                    var height = 315*2;
+                                    var width = 420*2;
+ 
+                                    $.fancybox({
+                                        'padding'      : 0,
+                                        'autoScale'    : false,
+                                    	'transitionIn' : 'fade',
+                            			'transitionOut': 'fade',
+                            			'title'        : $(this).attr('caption'),
+                        			    'width'        : width,
+                        			    'height'       : height,
+                        			    'href'         : href,
+                        			    'type'         : 'swf',
+                        			    'swf'          :{ 'wmode': 'transparent' , 'allowfullscreen': 'true'}     
+                                        });
+                                })
+                               .each( function (i, link ) {
+                                   var caption = $(this).attr('caption');
+                            	   $(this).html('<div class="caption">'+caption+'</div><img class="play" src="/images/playIcon.png" />');
+                                   var youtubeId = $(this).attr('youtube');
+                                   var href = "http://www.youtube.com/v/" + youtubeId ;
+                            	   $( '#tabs-'+(i+2)+' > p > a').attr({href:href});
+                                });
+               
+               $('#intro').tabs();
+           });
+     </script>
+  </head>
+
+  <body>
+     <div class='main'>
+			<a class="videoLink" youtube="W6hnpvBncDU" caption="Home" ></a>
+			<a class="videoLink" youtube="f_aU45iiYPM" caption="Search Page" ></a>
+			<a class="videoLink" youtube="qHSXtD0LtlE" caption="Log In/Out"></a>
+			<a class="videoLink" youtube="-39e5OjWYOI" caption="Shopping Cart"></a>
+			<a class="videoLink" youtube="zZz5BBI5aTc" caption="Category Landing and Product Details"></a>
+			<div class="clear_both"></div>
+     </div>
+     
+     <div id="intro">
+		<ul>
+			<li><a href="#tabs-1">Introducation</a></li>
+			<li><a href="#tabs-2">Home</a></li>
+			<li><a href="#tabs-3">Search Page</a></li>
+			<li><a href="#tabs-4">Log In/Out</a></li>
+			<li><a href="#tabs-5">Shopping Cart</a></li>			
+			<li><a href="#tabs-6">Category Landing and Product Details</a></li>						
+		</ul>
+		<div id="tabs-1">
+		   <dl>
+		      <dt>Summary</dt>
+ 			  <dd>This is a web application named "Lei's Virtual Store", in virtual store, there are lots of products you can search/view and add them into cart.<br />
+			   Actually, all data in back-end come from amazon and increased/updated automatically during your surfing.<br>
+			   It uses the Amazon Product Advertising API to communicate with Amazon.<br />
+			   These videos are in Youtube, please click play button to view them.
+			   </dd>
+			   <dt>Development environment</dt>
+			   <dd>
+			       <dl>
+			          <dt>OS:</dt>
+			          <dd>Ubuntu 12.04</dd>
+   			          <dt>Apache Web Server:</dt>
+			          <dd>2.2.22</dd>
+   			          <dt>PHP:</dt>
+			          <dd>5.3.10</dd>
+   			          <dt>MYSQL:</dt>
+			          <dd>5.5.22</dd>
+   			          <dt>MVC Framework:</dt>
+			          <dd>Zend Framework</dd>
+   			          <dt>Development Tool:</dt>
+			          <dd>Eclipse/Mysql Workbench</dd>
+   			          <dt>Source Control:</dt>
+			          <dd>Git</dd>
+			       </dl>
+			   </dd>
+		   </dl>
+		</div>
+		<div id="tabs-2">
+		    <div>If you have trouble to view this videos, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Home</a></p>
+		</div>
+		<div id="tabs-3">
+		    <div>If you have trouble to view this videos, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Search Page</a></p>
+		</div>
+		<div id="tabs-4">
+		    <div>If you have trouble to view this videos, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Log In/Out</a></p>
+		</div>
+		<div id="tabs-5">
+		    <div>If you have trouble to view this videos, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Shopping Cart</a></p>
+		</div>
+		<div id="tabs-6">
+		    <div>If you have trouble to view this videos, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Category Landing and Product Details</a></p>
+		</div>		
+    </div>
+  </body>
+</html>

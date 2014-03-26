@@ -1,0 +1,834 @@
+@CHARSET "UTF-8";
+
+* { margin: 0px; padding: 0px; }
+
+body 
+{	
+	position : relative;
+	padding : 10px; 
+}
+
+input, select
+{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+body > div#page
+{
+	position:relative; 
+	width: 960px; 
+	left:50%; 
+	margin-left:-480px;
+}
+
+#header, #footer 
+{ 
+   width : 960px;
+   height: 100px;
+   border : 1px solid grey;
+   border-radius: 4px;
+}
+
+#header-nav
+{
+   position: relative;
+ /*  background: url("/js/jquery/css/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png") repeat-x scroll 0 0 ;*/
+}
+
+#header-nav > ul 
+{ 
+   list-style-type: none ;
+   margin : 10px 10px 0px 0px;
+   float:right;   
+}
+
+#header-nav > ul > li
+{
+   margin-left : 3px;
+   margin-right : 1px;
+   padding : 2px 4px 2px 4px ;
+   float : left ;	
+   border : 1px solid white ;
+   border-radius: 4px;
+}
+
+#header-nav > ul > li >a,
+#header-nav > ul > li >a:hover,
+#header-nav > ul > li >a:visited
+{
+	text-decoration: none;
+	color : black;
+
+}
+
+   #footer-nav
+   {
+      text-align: center;
+      line-height: 50px;
+   }
+   
+   #footer-nav > ul
+   {
+
+      list-style-type: none;
+      display: inline-block;  
+   }
+   
+   #footer-nav > ul > li
+   {
+      float : left; 
+      margin-right : 10px;
+      line-height: 20px;
+      padding : 2px 4px 2px 4px ;
+      border : 1px solid white ;
+      border-radius: 4px;      
+   }
+   
+   #copyright
+   {
+      text-align: center;
+   }
+   
+#authenticationFormContainer dl dt,
+#authenticationFormContainer dl dd,
+form#searchform dl dt,
+form#searchform dl dd
+{
+   padding : 2px;	
+}
+
+#authenticationFormContainer dl dt { color : #666 ; font-weight: bold;}
+
+
+#authenticationFormContainer dl dd
+{ margin-left: 90px;}
+
+ul.authenticationErrors 
+{ 
+	list-style-type: none;
+	margin-bottom : 10px;
+	font: 12px arial,sans-serif;
+	color: #C33; 
+}
+
+#separator  {  clear: both; height:1px;}
+
+#footer
+{
+   margin: 10px 0px 10px 0px;
+}
+
+#main
+{
+  margin: 10px 0px 10px 0px;
+}
+          
+#content
+{
+   position: relative;
+   float : right;        
+   width : 700px;
+   height: 100%;
+   border: 0px blue solid;
+}
+
+#navigator
+{
+   position: relative;
+   float : left;
+   width : 240px;
+   height: 100%;           
+   border: 0px blue solid;
+   overflow: hidden;
+}
+
+#home-banner
+{
+	overflow:hidden;
+	/*overflow:scroll;*/
+	position:relative;
+	width : 960px;
+	margin : 5px 0px 0px 0px;
+}
+
+
+#banner-container
+{
+	position:relative;
+	width : 20000px;
+}
+
+#banner-container img
+{
+	margin-right: 2px;
+	border: 1px white solid;
+}
+
+#content > div.section 
+{
+	overflow:hidden;
+	position:relative;
+	width : 690px;
+	padding : 0px 5px 5px 5px;
+	margin : 0px 0px 10px 0px;
+	border : 1px grey solid;
+	min-height : 165px;
+
+    border-radius: 4px;
+}
+
+ /* menu for section */
+.initStatus    /* #content > div > span */ 
+{
+	border : 1px white solid;
+	margin : 0px 5px 0px 5px;
+	padding : 3px 5px 3px 5px;
+	background : #ccc;
+	color : #333 ;
+	cursor : pointer;
+	font: 13px arial,sans-serif;
+
+}
+
+.selectedMenu
+{
+	border : 1px #333 solid;
+	border-top : none ;	
+	border-right : 1px #001 solid; ;
+	
+	margin : 0px 5px 0px 5px;
+	padding : 2px 5px 2px 5px;
+	background : grey;
+	color :white ;
+	cursor : pointer;
+	font: 15px arial,sans-serif;
+}
+
+.hover
+{
+	border : 1px #003 solid;
+	border-top : none ;
+	border-right : 1px #666 solid; ;	
+}
+
+#content > div > img.leftPointer, #content > div > img.leftPointer
+{
+	cursor : pointer ;
+} 
+
+#content > div > div.imagesContainer
+{
+	position:relative;
+	width : 20000px;
+	margin-top : 10px;
+}
+
+div.imagesContainer > div
+{
+	position:relative;
+	float : left ;
+	padding : 5px;
+	text-align : center ;
+	border : 1px white solid;
+}
+
+/* item image */
+
+#content > div > div > div > img
+{
+	border : 1px white solid;
+}
+
+/* price */
+#content > div > div > div > span
+{
+	color : #963;
+}
+
+/*  quick view */
+
+#quickViewPane
+{
+	z-index :10; 
+    position : absolute ; 
+    white-space : nowrap;
+ /*   background-color :#999; */ 
+    padding :5px;
+    text-align:center;
+   background: url("/js/jquery/css/smoothness/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 0 0 transparent;
+   border-radius: 4px;
+}
+
+a.quickViewLink , a:hover.quickViewLink
+{
+	color : #000;
+	text-decoration : none ;
+	padding : 6px;
+	/*display : block;*/
+	text-align : center;
+}
+
+#quickview
+{
+    width : 572px;
+    position: relative;
+    overflow: hidden;
+}
+
+.quickViewImageContainer
+{
+    position: relative;
+    float: left;
+}
+
+.quickViewImage
+{
+    max-width: 230px;
+}
+
+.quickViewDetails
+{
+    float :left;
+    width: 332px;
+    position: relative;
+    margin:0px 0px 10px 0px;
+    padding: 0px 0px 0px 10px;    
+}
+
+.listPrice
+{
+   text-decoration: line-through;
+}
+
+.avail
+{
+   font-family: Verdana; 
+   font-size: 13px; 
+   color : #c66;
+   font-weight: bolder;
+   margin-left : 10px;
+   margin-top : 10px;
+}
+
+dt { position: relative; float:left; }
+dl { margin: 0px; padding: 0px;}
+dd { margin-left: 100px;}
+
+.quickviewTitle
+{
+   font-family: Verdana; 
+   font-size: 14px; 
+   color : #666;
+   font-weight: bolder;
+   margin-bottom : 10px;
+}
+
+.quickviewItemTitle
+{
+   font-family: Verdana; 
+   font-size: 14px; 
+   color : #333;
+}
+
+dl {
+   font-family: Verdana; 
+   font-size: 14px; 
+   color : #F66;
+}
+
+.addToCart, #itemDetailsAddToCart
+{
+   padding: 5px 7px 5px 7px;
+/*   background-color : #CCC; */
+   border : 1px solid #D3D3D3;
+   cursor : pointer ;
+   font-size : 14px;
+   background: url("/js/jquery/css/smoothness/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50% #E6E6E6;
+   border-radius: 4px;
+}
+
+.listPrice
+{
+   color : black;
+}
+
+div.moreDetails 
+{
+   margin : 10px 0px 10px 0px;*/
+   line-height:35px;
+   text-align: center;
+}      
+
+div.moreDetails > span >span
+{
+   margin-right : 10px;
+   display: inline-block;
+   vertical-align: middle;
+ /*  border : 1px solid black; */
+  /* height : 35px;*/
+}
+
+span.gotoDetailsPage > a,
+span.gotoDetailsPage > a.hover,
+span.gotoDetailsPage > a.visited
+{
+    text-decoration: none;
+}
+
+span.gotoDetailsPage > a > span
+{
+   color : #666;
+   background: url("/js/jquery/css/smoothness/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50% #E6E6E6;
+   border-radius: 4px;
+   padding : 2px 4px 2px 4px;
+   border : 1px solid #D3D3D3;   
+}
+
+span.gotoAmazon > a > img 
+{
+   border-radius: 4px;
+/*   padding : -2px -4px -2px -4px; */
+   border : 1px solid #D3D3D3;   
+   width : 70px; 
+}
+
+.navigatorItem,.navigatorCategories
+{
+	width : 238px;
+	border: 1px solid grey;
+	margin: 0px 1px 15px 0px;
+	padding:0px 0px 7px 0px;
+    border-radius: 4px;
+}
+
+.navigatorTitle
+{
+	background-color:#ccc;
+	border-bottom : 1px solid grey;
+	margin-bottom : 5px; 
+	padding : 3px 0px 3px 6px;      	
+}
+
+#category-label,#keyword-label
+{
+   color : #666;
+   margin-left : 6px;	
+}
+
+#category-element, #keyword-element
+{
+   margin-left : 80px;
+   margin-right : 10px;
+}
+
+#category, #keyword
+{ 
+	width : 100%;
+	padding : 0px;
+	margin : 0px;
+	border : 1px solid #ccc;
+}
+
+#Go-element
+{ margin: 5px 0px 5px -20px; }
+
+div.navigatorCategories > ul
+{
+   list-style-type: none;
+   margin: 0px 0px 10px 5px; 
+}
+
+div.navigatorCategories > ul > li 
+{
+   border : 1px solid white ; /*#D3D3D3;*/
+   padding : 0px 5px 0px 5px;
+   margin : 0px 10px 0px 0px;
+/*    background-color : #aaa ; */
+   border-radius: 4px;
+ 
+}
+/*
+div.navigatorCategories > ul > li > a > span 
+{
+   color : white ; 
+}
+*/
+
+
+div.navigatorCategories > ul > li > a
+{
+   text-decoration: none;
+}
+
+span.categoryName
+{
+   color : #333;
+}
+
+
+/* ----------- search result ---------------- */
+
+div#searchResult
+{
+	overflow:hidden;
+	position:relative;
+	width : 690px;
+	padding : 0px 5px 5px 5px;
+	margin : 0px 0px 10px 0px;
+	border : 1px grey solid;
+	min-height : 165px;
+    border-radius: 6px;
+}
+
+li.itemFound
+{
+   margin-top: 10px;	
+}
+
+div.itemFoundImage
+{
+   position : relative ;	
+   float: left;
+   width: 130px;
+   text-align: center;
+   min-height:50px;
+}
+
+
+div.itemFoundImage > img
+{
+	max-width: 120px;
+	max-height:140px;
+}
+
+itemFoundContent
+{
+   position : relative ;	
+}
+
+.itemFoundAddtoCart
+{
+	
+   font-family: Verdana; 
+   font-size: 13px; 
+ /*  color : #c66; */
+   font-weight: bolder;
+   position : relative;
+   float : right;
+}
+
+.itemFoundAddToCartButton
+{
+   padding: 5px 7px 5px 7px;
+/*   background-color : #ddd; */
+/*   color : #A66; */
+   margin-left : 20px;
+   margin-right: 20px;
+
+   border : 1px solid #D3D3D3;
+   cursor : pointer ;
+/*   font-size : 14px;*/
+   background: url("/js/jquery/css/smoothness/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50% #E6E6E6;
+   border-radius: 4px;
+}
+
+/* ------ pagination ------- */
+#pagination
+{
+	min-height : 0px;
+	border : 1px white solid;
+	margin : 2px 0px 2px 0px;
+}
+
+#pagination > p 
+{ 
+	position: relative ; 
+	float : left; 
+}
+
+div#paginationContainer
+{
+	float : right ;
+}
+
+div#paginationContainer > div , div.pageNum
+{
+	position: relative ;
+    float : left; 	
+}
+
+div#paginationView
+{
+	position: relative ; 
+	overflow: hidden;
+	max-width : 190px;
+	margin-right : 2px;
+}
+
+div#pageNumContainer
+{ 
+	position: relative ; 
+    width : 200000px;   
+}
+ 
+div.pageNum, div.selectGroup
+{
+   min-width : 10px;
+   padding : 2px;
+   margin : 0px 2px 0px 2px;	
+}
+
+/* shopping cart */
+
+#myOverlay
+{
+	position:absolute;
+	width:100%;
+	height: 20000px;
+    left:0 ;
+    top:0 ;
+    background-color: #777;
+    z-index :5
+}
+
+#numOfItemsInCart, #itemDetailsNumOfItemsInCart
+{
+   margin-left : 10px;
+   font-family: verdana;
+   font-size : 12px;	
+}
+
+/* popup window */
+#popupShoppingcart
+{
+	position: absolute;
+	z-index :10;
+    text-align : center ; 
+    background-color : white ;
+    max-width : 550px;
+    border:1px solid #D3D3D3;
+    border-radius: 6px;    
+  
+}
+
+/* button */
+#popupCartCheckout, #CartCheckout, #emptyCart
+{
+   padding: 5px 7px 5px 7px;
+   border : 1px solid #D3D3D3;
+ /*  background-color : #CCC; */
+   cursor : pointer ;
+   background: url("/js/jquery/css/smoothness/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50% #E6E6E6;
+   border-radius: 6px;
+}
+
+#emptyCart
+{ margin-left : 20px;}
+
+div.qtyUpdate, div.qtyRemove
+{ 
+   padding: 2px 3px 2px 3px;
+   margin : 2px 0px 2px 0px;
+   border : 1px solid #D3D3D3;
+   
+/*   background-color : #CCC; */
+   cursor : pointer ;
+   font-size : 12px;
+   background: url("/js/jquery/css/smoothness/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50% #E6E6E6;
+
+   border-radius: 4px;
+}
+
+
+#shoppingcartTitle
+{
+   font-family: serif;
+   font-size : 20px;
+   margin : 0px 0px 10px 0px;	
+}
+
+#shoppingcartContent
+{
+	overflow:hidden;
+	position:relative;
+	width : 690px;
+	padding : 0px 5px 5px 5px;
+	margin : 0px 0px 10px 0px;
+	border : 1px grey solid;
+	min-height : 165px;
+}
+
+.cartItemImage
+{
+   max-width:80px;
+   max-height:80px;	
+}
+
+.cartItemTitle
+{
+   padding-left:10px;
+}
+
+/* details page */
+
+div#itemDetails
+{
+	overflow:hidden;
+	position:relative;
+	width : 690px;
+    padding : 5px;
+	margin : 0px 0px 10px 0px;
+	border : 1px grey solid;
+	min-height : 165px;
+    border-radius: 4px;
+}
+
+div#itemDetails div.noItemError
+{
+    color : #F33;
+    margin : 20px 0px 0px 20px;
+    font-family : serif;
+    font-size : 14px; 
+}
+
+/* Details page */
+div#itemDetailsMediumImageContainer
+{
+   text-align: center;
+   width : 125px;
+   margin: 5px;
+   padding : 3px;
+   position : relative;
+   border   : 1px solid white;
+}
+
+ div.itemDetailsImage > img,
+ div.itemDetailsItemContainer > img,
+ div.categoryItemsContainer > img
+ {
+     max-width : 120px;
+     max-height :130px;
+ }
+ 
+ div.itemDetailsHeader
+ {
+    position: relative;
+ }
+ 
+ div#itemDetailsHeader > div
+ {
+    position: relative;
+    float : left;
+ }
+ 
+ div#itemDetailsPrimaryInfo
+ {
+    width : 525px;
+    padding-left : 15px;
+    padding-top  : 5px;
+ }
+ 
+div#itemDetailsMoreInfo
+{ 
+     margin-left : 10px;
+}     
+ 
+ div#itemDetailsMoreAttr
+ {
+    position: relative;
+    margin-top  : 10px;
+ }
+ 
+  div#itemDetailsMoreAttr > dl
+  {
+     position: relative;  
+     float : left;
+     width : 330px;
+  }
+ 
+  p.itemDetailsSectionTitle
+  {
+     border-bottom : 1px solid #D3D3D3;
+     margin : 0px 0px 10px 0px;
+     font-size : 18px;
+  }
+  
+  div#itemDetailsFeature > dl > dt ,
+  div#itemDetailsFeature > dl > dd , 
+  div#itemDetailsTracks > dl > dt , 
+  div#itemDetailsTracks > dl > dd 
+  {
+     color : #333;
+  }
+  
+  
+  div#itemDetailsFeature > dl > dd,
+  div#itemDetailsTracks > dl > dd    
+  {
+     margin-left : 20px;
+  }
+  
+  div.itemDetailsViewer
+  {
+      position : relative;
+      overflow : hidden;
+  }
+  
+  div.itemDetailsList
+  {
+      position : relative;
+      width : 20000px;
+  }
+  
+  div.itemDetailsItemContainer,
+  div.categoryItemsContainer
+  {
+     float : left ;
+     width : 125px;
+     margin : 2px ;
+     padding : 0px 2px 10px 2px;
+     text-align: center;
+     border : 1px solid white;
+  }
+  
+  div.itemDetailsItemContainer > div.itemDetailsItemTitle > span,
+  div#itemDetailsLegalDisclaimer > div,
+  div.categoryItemsContainer > div.categoryItemTitle > span  
+  {
+     font-family: Verdana, Arial, sans-serif;
+     font-size : 12px;
+     color : #333;  
+  }
+  
+  div.itemDetailsItemContainer > div.itemDetailsItemTitle > span,
+  div.categoryItemsContainer > div.categoryItemTitle > span
+  {
+     display: inline-block;
+     vertical-align: bottom;
+  }
+  
+  div.itemDetailsItemContainer > div.itemDetailsItemTitle,
+  div.categoryItemsContainer > div.categoryItemTitle
+  {
+     word-break : break-all;
+  }  
+  
+  img#itemDetailLargeImage
+  {
+     position : absolute;
+     z-index : 2;
+     border-radius: 6px;  
+  }
+  
+ .checkoutButton
+ {
+   padding: 5px 7px 5px 7px;
+/*   background-color : #CCC; */
+   border : 1px solid #D3D3D3;
+   cursor : pointer ;
+   font-size : 13px;
+   background: url("/js/jquery/css/smoothness/images/ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50% #E6E6E6;
+   border-radius: 4px;
+ }

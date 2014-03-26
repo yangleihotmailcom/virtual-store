@@ -1,0 +1,17 @@
+<?php foreach ( $this->categories as $productCategories ): ?>
+   <div class='section'>
+       <img src='/ajax/banner/cursor/direction/left/width/10/height/20/color/cccccc' class='leftPointer' />
+       <?php 
+             foreach ( $productCategories as $category )
+	         {
+		           $name =  $this->escape($category['ProductGroup']);
+		           echo "<span name='$name' class='initStatus'>$name</span>";
+		     }
+       ?>
+       <img src='/ajax/banner/cursor/direction/right/width/10/height/20/color/cccccc' class='rightPointer' />
+       <div class="imagesContainer"></div>
+   </div>  
+<?php endforeach;?>
+
+
+

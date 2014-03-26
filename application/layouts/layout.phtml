@@ -1,0 +1,52 @@
+<!-- content page for virtual store website -->
+<?php echo $this->doctype(); ?>
+<html>
+  <head>
+    <?php 
+        echo $this->headMeta();
+        echo $this->headTitle(); 
+        $this->headLink()->appendStylesheet($this->baseUrl().'/css/styles.css');
+//         $this->headLink()->appendStylesheet($this->baseUrl().'/js/jquery/css/swanky-purse/jquery-ui-1.8.20.custom.css');        
+        $this->headLink()->appendStylesheet($this->baseUrl().'/js/jquery/css/smoothness/jquery-ui-1.8.20.custom.css');        
+        $this->headLink()->appendStylesheet($this->baseUrl().'/js/fancybox/jquery.fancybox-1.3.4.css');        
+        
+      	$this->headScript()->appendFile($this->baseUrl().'/js/jquery/js/jquery-1.7.2.min.js');
+      	$this->headScript()->appendFile($this->baseUrl().'/js/jquery/js/jquery-ui-1.8.20.custom.min.js');
+      	$this->headScript()->appendFile($this->baseUrl().'/js/fancybox/jquery.fancybox-1.3.4.pack.js');
+      	$this->headScript()->appendFile($this->baseUrl().'/js/jquery.pause.js');      	
+      	$this->headScript()->appendFile($this->baseUrl().'/js/frontend.js');
+
+        echo $this->headLink(); 
+        echo $this->headScript();
+    ?>
+   
+  </head>
+  <body>
+      <div id="page">
+         <div id="header">
+            <?php echo $this->render("header.phtml") ;?>
+         </div>
+
+         <div id='home-banner'>
+            <div id='home-banner-waiting' style='text-align: center; height: 200px; line-height: 200px;'>
+               <img src='/images/ajax-loader.gif' alt='Please waiting...' title='Please waiting...' style='vertical-align: middle;' />
+            </div> 
+            <div id='banner-container'></div>
+         </div>   
+         
+		 <div id="main">
+               <div id="navigator">
+                  <img src='/images/ajax-loader.gif' alt='Please waiting...' title='Please waiting...' />
+               </div>
+               <div id="content">
+					<?php echo $this->layout()->content; ?> 
+               </div>
+         </div> 
+         <div id='separator'></div>        
+         <div id="footer">
+             <?php echo $this->render("footer.phtml"); ?>
+         </div>
+      </div>
+  </body>
+</html>
+

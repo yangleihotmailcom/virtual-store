@@ -1,0 +1,47 @@
+<?php
+   if ( count($this->results) == 0 ) 	echo 'No item.';
+   else	 {
+?>
+<table style="width: 100%; padding: 5px 10px 5px 10px;">
+ <thead>
+   <tr style="height:50px;">
+    <th>Item</th>
+    <th align="left" style='padding-left:10px;'>Title</th>
+    <th align="center">Quantity</th>
+    <th align="right">Price</th>
+  </tr>
+  <tr><th colspan="4" style="height:1px"><div style="border-top: 1px solid grey;"></div></th></tr>
+ </thead>
+ <tbody>
+    <?php 
+         $total = 0 ;
+         foreach ( $this->results as $item ) 
+         {
+         	$src = $item['SmallImage'];
+         	$title = $item['title'];
+         	if (strlen($title) > 200 ) $title = substr($title, 0 , 200).'...';
+         	$price = $item['price'];
+         	$formatedPrice = number_format($price/100,2,'.','');
+         	$qty = $item['qty'];
+         	$total += $price*$qty ;
+         	echo '<tr>';
+         	echo "<td align='center'><img src='$src' style='max-width:50px;max-height:50px;' /></td>";
+         	echo "<td align='left' style='padding-left:10px;'>$title</td>";
+         	echo "<td align='center'>$qty</td>";
+         	echo "<td align='right'>\$$formatedPrice</td>";
+         	echo '</tr>';
+         }
+    ?>
+  </tbody>
+  <?php
+		  $total = number_format($total/100,2,'.','');
+		  echo '<tfoot>';
+		  echo '<tr><td colspan="4" style="height:1px"><div style="border-top: 1px solid grey;"></div></td></tr>' ;
+		  echo '<tr style="height:50px;">';
+		  echo '<td colspan="2" align="left"><span id="popupCartCheckout">Shopping Cart</span></dt>';		  
+		  echo '<td align="right"><span  style="margin-right:5px;">Estimate</span></dt>';
+		  echo "<td align='right'>\$$total</td>";
+		  echo '</tr></tfoot>';
+  ?>
+</table>
+<?php  } ?>

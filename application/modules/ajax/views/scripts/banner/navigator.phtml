@@ -1,0 +1,21 @@
+<div class="navigatorItem">
+  <div class='navigatorTitle'>Search</div>
+<?php
+    echo $this->searchForm;
+?>
+</div>
+
+<div class="navigatorCategories">
+  <div class='navigatorTitle'>Categories</div>
+    <ul>
+		<?php
+		    foreach ( $this->categories as $category)
+		    {
+		       $name = $category['ProductGroup'];
+		       $nameHTML = $this->escape($name);
+		       $URL = $this->url( array('module'=>'default','controller'=>'index', 'action'=>'category','name'=>$name) );	
+		       echo '<li>'."<a href='$URL'><span class='categoryName'>$nameHTML</span></a>".'</li>';
+		    }
+		?>
+    </ul>
+</div>

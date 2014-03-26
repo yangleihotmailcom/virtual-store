@@ -1,0 +1,140 @@
+<?php
+   $keyword = $this->escape($this->parameters["keyword"]); 
+   $category = $this->escape($this->parameters["category"]);
+   $totalPages = min($this->totalPages, 10);
+   $totalResults = min($this->totalResults, 100);
+   echo '<div id="pagination">';
+	   echo "<p id='resultInfo'>Found $totalResults '$keyword' in $category</p>";
+	   if ( $totalPages > 1 )
+	   {
+		   echo '<div id="paginationContainer">';
+		      //echo '<div class="selectGroup">|&lt;</div><div class="selectGroup">&lt;</div>';
+		      echo '<div id="paginationView"><div id="pageNumContainer">';
+		            for ( $i = 1 ; $i <= $totalPages ; $i++ ) echo "<div class='pageNum' page='$i'>$i</div>";  
+		      echo '</div></div>';
+		      //echo '<div class="selectGroup">&gt;</div><div class="selectGroup">&gt;|</div>';
+		   echo '</div>';
+	   }	   
+   echo '</div>';
+?>
+<script type="text/javascript">
+<!--
+      var searchParam = <?php echo json_encode($this->parameters) ; ?>;
+//-->
+</script>   
+<div id="searchResult"><ul>
+   <?php
+     foreach ( $this->results as $item)
+     { 
+     	 $asin = $item['asin'];
+     	 $image = $item['MediumImage'];
+     	 $title = $item['Title'];
+     	 if ( strlen($title) > 300 ) $title = substr($item['Title'],0, 300).'...';
+	     echo "<li class='itemFound' asin='$asin'>";
+	     if ( $image )
+	        echo "<div class='itemFoundImage'><img src='$image' alt='$title' /></div>";
+	     else 
+	     	echo "<div class='itemFoundImage'><div style='margin:auto auto;'>No Image</div></div>";
+	     echo "<div class='itemFoundContent'>";
+	     
+	     echo "<p class='quickviewTitle'>$title</p>";
+	     
+	     echo '<dl>';
+	     
+	     // Author
+	     $keys = array('Actor','Creator','Author','Artist');
+	     foreach ( $keys as $key ) {
+		     $value = $item[$key];
+		     if ( strlen( $value ) == 0 ) continue;
+		     echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+	     }
+	     
+	     // Price
+	     $key = 'Amount';
+	     $listPrice = $item[$key];
+	     if ( $listPrice) $listPrice = number_format($listPrice/100, 2);
+
+	     $key = 'Price';
+	     $amazonPrice = $item[$key];
+	     if ( $amazonPrice) $amazonPrice = number_format($amazonPrice/100, 2);
+	     
+	     $OfferListingId = $item['OfferListingId'];
+	     $availability = $item['Availability'];
+	     $condition = $item['Condition'];
+	     if ( $condition ) $condition = '('.$condition.')';
+
+	     $price = '';
+	     if ( $listPrice && $amazonPrice )
+	     {
+	     	if ( $listPrice > $amazonPrice )
+	           $price = "<span class='listPrice'>\$$listPrice</span> <span>\$$amazonPrice</span>";
+	     	else 
+      		   $price = "<span>\$$listPrice</span>";
+	     }
+	     
+	     if ( $listPrice && ! $amazonPrice)
+	     {
+	     	$price = "<span>\$$listPrice</span>";
+	     }
+	     
+     	 if ( ! $listPrice && $amazonPrice)
+	     {
+	     	$price = "<span>\$$amazonPrice</span>";
+	     }
+	     
+	     if ( $price )
+	     	echo "<dt class='quickviewItemTitle'>Price:</dt><dd>$price $condition</dd>";
+	     
+     	// Manufacturer
+	     $keys = array('Studio','Label','Manufacturer');
+	     foreach ( $keys as $key ) {
+		     $value = $item[$key];
+		     if ( strlen( $value ) == 0 ) continue;
+	         echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+	         break;
+	     }
+
+	     $key = 'Department';
+	     $value = $item[$key];
+	     if ( $value ) echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+     	     
+     	// Format
+         	$keys = array('Format','Genre');
+	     	foreach ( $keys as $key ) {
+		     	$value = $item[$key];
+		     	if ( strlen( $value ) == 0 ) continue;
+		     	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+	     	}
+//    		// SalesRank
+//     		$key = 'SalesRank';
+//      		$value = $item[$key];
+//      		echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+	     
+//    		// Number
+//      		$keys = array('NumberOfItems','NumberOfPages','NumberOfDiscs');
+//      		foreach ( $keys as $key ) {
+//      		$value = $item[$key];
+//      		if ( strlen( $value ) == 0 ) continue;
+//      		echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+// 	            }
+	     echo "</dl>";
+	     if ($availability)
+	     	echo "<span class='avail'>$availability</span>";
+	     
+	       if ( $listPrice || $amazonPrice || $availability )
+	       {
+		     echo "<div class='itemFoundAddtoCart'>";
+		     if ( $listPrice || $amazonPrice )
+// 		     	$loading = <<<loading
+// 		     	 	<div style="width:40px;height:40px;background:url('/js/fancybox/fancy_loading.png') no-repeat scroll 0 0">&nbsp;</div>
+// loading;
+// 				echo $loading;	     	
+		     	echo "<div class='itemFoundAddToCartButton'>Add to Cart</div>" ;
+		     echo "</div>";
+	       } 
+	     echo "</div>";
+         echo '<div style="clear:both;"></div>';
+	     echo "</li>";
+     }
+    ?>
+</ul></div>

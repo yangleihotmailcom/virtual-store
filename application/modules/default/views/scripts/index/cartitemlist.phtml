@@ -1,0 +1,50 @@
+<tbody>
+    <?php 
+         $total = 0 ;
+         foreach ( $this->results as $item ) 
+         {
+         	//print_r( $item ); exit();
+         	$src = $item['SmallImage'];
+         	$title = $item['title'];
+         	if (strlen($title) > 200 ) $title = substr($title, 0 , 200).'...';
+         	$formatedTitle = htmlspecialchars($title, ENT_QUOTES);
+         	
+         	$price = $item['price'];
+         	$formatedPrice = number_format($price/100,2,'.','');
+         	$qty = $item['qty'];
+         	$asin = $item['asin'];
+         	$cartID = $item['id'];
+
+         	$total += $price*$qty ;
+         	
+         	echo '<tr>';
+         	echo "<td align='center'><img src='$src' class='cartItemImage' alt='$formatedTitle' /><br/><span style='font-size:11px;'>$asin</span></td>";
+         	echo "<td align='left' class='cartItemTitle'>$formatedTitle</td>";
+         	$form = <<<form
+         	     <form action='#' method='post' class='qtyForm'>
+         	         <div><input type='text' name='qty' value='$qty' style='width:30px;text-align:right;' /></div>
+         	         <div><input type='hidden' name='asin' value='$asin' /></div>
+         	         <div><input type='hidden' name='cartID' value='$cartID' /></div>         	         
+         	         <div><input type='hidden' name='price' value='$price' /></div>         	         
+         	         <div class="qtyUpdate">update</div>
+         	         <div class="qtyRemove">Remove</div>
+         	         <div><input type='submit' name='submit' style='display:none;' /></div>
+      	         </form>
+form;
+         	echo "<td align='center'>$form</td>";
+         	echo "<td align='right'>\$$formatedPrice</td>";
+         	echo '</tr>';
+         }
+    ?>
+</tbody>
+<tbody>
+  <?php
+		  $total = number_format($total/100,2,'.','');
+		  echo '<tr><td colspan="4" style="height:1px"><div style="border-top: 1px solid grey;"></div></td></tr>' ;
+		  echo '<tr style="height:50px;">';
+		  echo '<td colspan="2" align="left"><span id="CartCheckout">Check Out</span><span id="emptyCart">Empty</span></td>';		  
+		  echo '<td align="right"><span  style="margin-right:5px;">Estimate</span></td>';
+		  echo "<td align='right'><span id='cartTotal'>\$$total</span></td>";
+		  echo '</tr>';
+  ?>
+</tbody>

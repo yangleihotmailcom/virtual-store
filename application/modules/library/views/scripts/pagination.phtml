@@ -1,0 +1,8 @@
+<?php
+   foreach ( $this->pagesInRange as $page )
+   {
+   	  if ( $this->current != $page )
+   	 echo ' <a href="'.$this->url(array('page'=>$page)).'">'.$page.'</a> |';
+   	  else echo " $page |";
+   } 
+?>

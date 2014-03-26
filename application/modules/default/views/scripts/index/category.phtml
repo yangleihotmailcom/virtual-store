@@ -1,0 +1,105 @@
+<div id='category'>
+   <?php
+       foreach ( $this->results as $title => $result )
+       {
+       	   if ( count($result) == 0 ) continue ;
+       	   echo "<div class='categoryTitle'>$title</div>";
+       	   echo "<div class='categoryItemsList'>";
+       	   $i = 1 ;       	   
+       	   foreach ( $result as $item )
+       	   {
+       	   		if ( $i > 5 ) break;
+       	   		$asin = $item['asin'];
+       	   		$src =  $item['MediumImage'];
+       	   		$title = $item['Title'];
+       	   		$formatedTitle = $title;
+       	   		if ( strlen($formatedTitle) > 100 ) $formatedTitle = substr($formatedTitle, 0 , 100 ).'...';
+       	   		$formatedTitle = wordwrap($formatedTitle, 13, '<br />', true);
+       	   		$title = htmlspecialchars($title, ENT_QUOTES ); //print_r( $title );exit();
+       	   		$$formatedTitle = htmlspecialchars($formatedTitle,ENT_QUOTES);
+       	   	
+       	   		echo "<div class='categoryItemsContainer' asin='$asin'>";
+       	   		echo "<img src='$src' title='$title' alt='$title' />";
+       	//   		else echo '<div class="itemDetailsNoImage"><span>No Image</span></div>';
+       	   		echo '<div class="categoryItemTitle"><span>'.$formatedTitle.'</span></div>';
+       	   		echo '</div>';
+       	   		$i++ ;
+       	   }
+       	   echo "</div>";
+       	   echo '<div style="clear: both; height: 15px;"></div>';
+       } 
+   ?>
+   <script type="text/javascript">
+        var categoryName = '<?php echo $this->categoryName ; ?>'; 
+   </script>
+</div>
+
+<script type="text/javascript">
+<!--
+     $(window).load( function() { //return ;
+        var sections = [];
+   		$("div.categoryItemsList").each( function ( i ,list ) { sections.push( $(list).children() ); });
+        for ( i = 0 ; i < sections.length ; i++ )
+        { 
+            var height = 0 ;
+		    sections[i].each( function (index, item) { height = Math.max(height, $(item).height()); console.log($(item).height()); });
+		    sections[i].each( function (index, item) { 
+  			      $(item).height(height); //console.log(height); return;
+     		      var img = $('img', item);
+    	          var lineHeight = height - img.height()-10; //console.log(lineHeight);
+                  var divTitle = $('div.categoryItemTitle' ,item)
+                                      .height( lineHeight )
+                                      .css({ "line-height": lineHeight + "px" });
+                  var spanTitle = $('span' , divTitle).css({ "line-height": "15px" });
+		    });				
+        }
+     });
+
+     $(document).ready( function () {
+    	var aLink = $("<a></a>").attr({"href":"#"}).hide().appendTo('body').fancybox({ onComplete : fancyboxItem.onComplete });
+ 		$("div.categoryItemsContainer").css({cursor:"pointer"})
+ 		                              .hover( function () { $(this).css({border : "1px solid #D3D3D3"});} , 
+ 	     		                              function () { $(this).css({border : ""});} )
+                    			      .click( function () {
+ 							    	  var asin = $(this).attr('asin'); 
+ 							    	  aLink.attr({"href":"/ajax/banner/quickview/asin/"+asin});
+ 							    	  aLink.trigger('click');});
+     });
+//-->
+</script>
+
+<style>
+<!--
+div#category
+{
+	position:relative;
+	border : none;  /*1px grey solid;*/
+}
+
+div.categoryItemsList
+{
+	overflow:hidden;
+	position:relative;
+	width : 690px;
+    padding : 5px;
+	margin : 0px 0px 10px 0px;
+	border : 1px grey solid;
+	min-height : 165px;
+
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;   
+}
+
+div.categoryTitle
+{
+   font-family: verdana;
+   font-size : 20px;
+   padding-left : 10px;
+   margin : 0px 0px 5px 0px;
+}
+
+-->
+</style>
+

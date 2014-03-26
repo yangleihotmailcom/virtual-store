@@ -1,0 +1,60 @@
+<div id="shoppingcartTitle">Shopping Cart</div>
+<div id="shoppingcartContent">
+  <table style="width: 100%; padding: 5px 10px 5px 10px;">
+	 <thead>
+	   <tr style="height:50px;">
+	    <th>Item</th>
+	    <th align="left" style='padding-left:10px;'>Title</th>
+	    <th align="center">Quantity</th>
+	    <th align="right">Price</th>
+	  </tr>
+	  <tr><th colspan="4" style="height:1px"><div style="border-top: 1px solid grey;"></div></th></tr>
+	 </thead>
+	 <?php include_once 'cartitemlist.phtml' ; ?>
+ </table>
+
+	<a id="CheckoutProcess" href="#CheckoutProcessContent" style="display:none;" >&nbsp;</a>
+	<div style="display:none">
+	   <div id="CheckoutProcessContent" style='height: 300px; width:400px; text-align: center;padding:10px;border:1px solid grey;'>
+	        <img src="/images/ajax-loader.gif" alt="processing..." /><br /><br /> 
+	        <span>Processing...</span>
+	   </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+<!--
+     $(document).ready( function () {
+	     $("a#CheckoutProcess").fancybox( {'showCloseButton': false, speedIn : 0, speedOut : 0 } );         
+	     $('#shoppingcartContent').on('click','#CartCheckout', function () {
+        	     $("a#CheckoutProcess").trigger('click');
+        	     $.ajax({
+            	     url : '/ajax/cart/checkout',
+            	     type :'POST',
+            	     dataType: 'json',
+                	 data : { format:'json'},
+                	 success : function ( data ) {
+                    	         //console.log(data);
+                    	         if ( ! data.valid ) { document.location.href = '/'; return ; };
+                    	         if ( data.needLogin )
+                    	         {
+                        	         cart.checkout =true;
+                        	         $.fancybox.close();
+                           	         setTimeout(function() {
+                              	           $('#header-login').parent('a').trigger('click');
+                           	         }, 200);
+                           	         return;
+                       	         }
+                       	         cart.gotoAmazon( data );
+                    	      },
+                	 error : function () {  
+                    	 errorMessage = $('<span>Internal error, please try again.<br /><br /><br /></span>');
+                    	 errorOK = $('<span class="checkoutButton">OK</span>');
+                    	 errorOK.click( function () {$.fancybox.close();});
+                		 $('#CheckoutProcessContent').empty().append(errorMessage).append(errorOK);
+                  	          }    
+           	     });   
+             });
+     });
+//-->
+</script>

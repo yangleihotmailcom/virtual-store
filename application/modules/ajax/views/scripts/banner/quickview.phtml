@@ -1,0 +1,147 @@
+<?php  
+   $item = $this->item[0];
+   $largeImage = $item['LargeImage'];
+   $amazonURL = $item['DetailPageURL'];
+?>
+
+
+<div id="quickview">
+   <div class="quickViewImageContainer">
+      <?php
+          if ( $largeImage )
+          	echo "<img class='quickViewImage' src='$largeImage' />";
+          else 
+          	echo "<div style='width:230px;'>No Image</div>";
+          
+          $asin = $item['ASIN'];
+          $moreInfo = <<<moreInfo
+               <div class="moreDetails">
+                 <span>
+                   <span class="gotoDetailsPage"><a href="/index/details/asin/$asin"><span>More Detail</span></a></span>
+                   <span style="color:black;"></span>
+                   <span class="gotoAmazon"><a href="$amazonURL" target='_blank'><img src="/images/amazon.jpeg" title="Go to Amazon" /></a></span>
+                  </span>
+               </div>
+moreInfo;
+          echo $moreInfo;
+          
+      ?>       
+   </div>
+   <div class="quickViewDetails">
+           <?php
+	           // Title
+	           $key = 'Title';
+	           $value = $item[$key];
+	           echo "<div class='quickviewTitle'>$value</div>";
+	           
+	           echo '<dl>';
+                  
+            // Author      
+                  $keys = array('Actor','Creator','Author','Artist');
+                  foreach ( $keys as $key ) {
+            	     $value = $item[$key];
+            	     if ( strlen( $value ) == 0 ) continue;
+            	     echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";	
+                  }
+                  
+            // Price
+                  $key = 'Amount';
+                  $listPrice = $item[$key];
+                  if ( $listPrice) $listPrice = number_format($listPrice/100, 2);
+
+                  $amazonPrice = '';
+                  $OfferListingId = '';
+                  $availability = '';
+                  $condition = '';
+                  $price = '';
+                  if ( count($this->offer) > 0 )
+                  {
+                  	$offer = $this->offer[0]; 
+                  	$amazonPrice = $offer['Price'];
+                  	if ( $amazonPrice ) $amazonPrice = number_format($offer['Price']/100, 2);
+                  	$OfferListingId = $offer['OfferListingId']; 
+                  	$availability = $offer['Availability'];
+                  	$condition = $offer['Condition'];                  	                  	
+                  }
+                  
+                  //echo $listPrice.'---'.$amazonPrice; exit();
+                  if ( $listPrice && $amazonPrice )
+                  {
+                  	  if ( $listPrice > $amazonPrice )
+                  	       $price = "<span class='listPrice'>\$$listPrice</span> <span>\$$amazonPrice</span>";
+                  	  else
+                 	  	   $price = "<span>\$$listPrice</span>";
+                  }
+                  
+                  if ( $listPrice && ! $amazonPrice)
+                  {
+                  	$price = "<span>\$$listPrice</span>";
+                  }
+                  
+                  if ( ! $listPrice && $amazonPrice)
+                  {
+                  	$price = "<span>\$$amazonPrice</span>";                  	
+                  }
+                  
+                  if ( $price )
+                  echo "<dt class='quickviewItemTitle'>Price:</dt><dd>$price $condition</dd>";
+                  
+              // Manufacturer
+                  $keys = array('Studio','Label','Manufacturer');
+                  foreach ( $keys as $key ) {
+                  	$value = $item[$key];
+                  	if ( strlen( $value ) == 0 ) continue;
+                  	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+                  	break;
+                  }
+                  
+              // Department
+                  $key = 'Department' ;
+                  $value = $item[$key];
+                  if ( strlen( $value ) != 0  ) 
+                  	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+             
+                  
+              // Format
+                  $keys = array('Format','Genre');
+                  foreach ( $keys as $key ) {
+                  	$value = $item[$key];
+                  	if ( strlen( $value ) == 0 ) continue;
+                  	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+                  }
+              // SalesRank
+                  $key = 'SalesRank';
+                  $value = $item[$key];
+                  if ( strlen( $value ) != 0 ) 
+                     echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+                  
+              // Number    
+                  $keys = array('NumberOfItems','NumberOfPages','NumberOfDiscs');
+                  foreach ( $keys as $key ) {
+                  	$value = $item[$key];
+                  	if ( strlen( $value ) == 0 ) continue;
+                  	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+                  }
+
+              echo "</dl>";
+           ?>
+
+          <div style="clear:both;"></div>
+          <?php
+          // Aailability
+            if ($availability)
+              	echo "<div class='avail'>$availability</div>";
+            
+             if ( $price ) {
+             	$num = 0 ;
+             	if ( count( $this->itemInCart ) > 0 ) $num = $this->itemInCart[0]['qty']; 
+          	    echo "<div style='padding-left:50px;margin-top:20px;'>";
+          	    echo "<span class='addToCart' asin='$asin'>Add to Cart</span>";
+          	    echo "<span><span id='numOfItemsInCart'>$num</span> item(s) in your cart</span>";
+          	    echo "</div>";
+             }
+
+             
+          ?>
+   </div>
+</div>

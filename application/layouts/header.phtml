@@ -1,0 +1,31 @@
+<!-- Header for virtual store website -->
+<script type="text/javascript">
+      $(document).ready( function () {
+      <?php 
+              // Check user login or not.
+              if (is_null( $this->userInfo )  )
+              {
+              	   echo 'Authentication.logout();';
+              }
+              else
+             {
+             	$username = $this->userInfo->username ;
+             	echo "var result = { username : '$username'};";
+             	echo 'Authentication.login(result);';
+              } 
+       	?>
+      });  
+
+</script>
+ <div id="header-nav">
+  <a href="/" title="Virtual Store"><img alt="Logo" src="/ajax/banner/logo" /></a>       	
+  <ul>
+	  <li><a href="/ajax/authentication/index"><span id="header-login">Log in</span></a></li>
+	  <li><a href="/ajax/authentication/logout"><span id="header-logout">Log out</span></a></li>
+	  <li><span id="header-shoppingCart">Shopping Cart</span></li>
+	  <li><select name="languages" id="languages">
+	           <option value='en'>English</option>
+	           <option value='zh'>Chinese</option>
+	      </select></li>
+  </ul>
+</div>

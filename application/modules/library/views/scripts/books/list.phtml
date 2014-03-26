@@ -1,0 +1,15 @@
+<?php $this->jQuery()->enable()->addJavascriptFile($this->baseUrl().'/js/frontend.js'); ?>
+    <h1>Welcome <?php echo $this->currentUser ?> to list of books</h1>
+    <?php
+       echo $this->translate->_('Books').':';
+       $paginationControl = $this->paginationControl($this->paginator,'Sliding','pagination.phtml');
+       echo "<div>".$paginationControl."</div>";
+        foreach ($this->paginator as $book )
+        {
+        	echo $this->accordionPane('books', 
+   			  "Price: ".$book['price']."<br /><a href='/cart/add?id=".$book['id']."'>Buy now</a>",
+   			  array('title'=>$book['name'] ));
+        }
+        echo $this->accordionContainer('books',
+        		                        array('active'=>'none','collapsible'=>'true'));
+  	?>

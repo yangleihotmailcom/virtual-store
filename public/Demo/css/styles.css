@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+
+* { margin : 0px; padding: 0px; }
+   
+body {
+ /*   background-color: #222222; */
+    margin: 40px;
+   }
+   
+   div.main
+   {
+      background: url("../images/filmstrip_tile.png") repeat-y scroll 0 0 #000000;
+      border: 2px solid #444444;
+      border-radius: 10px 10px 10px 10px;
+      padding: 25px 0 25px 115px;
+     	border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+   }
+   
+   a.videoLink 
+   {
+  background: none no-repeat scroll 0 0 transparent;
+  border: 1px solid #000000;
+  cursor: pointer;
+  display: block;
+  float: left;
+  height: 140px;
+  margin: 0 15px 15px 0;
+  padding: 0;
+  position: relative;
+  width: 200px;
+}
+
+div.clear_both
+{
+   clear: both;
+   line-height: 1px;
+}
+
+  a.videoLink img.play { position: absolute; top: 25px; left: 75px; }
+  a.videoLink div.caption {
+          position: absolute; 
+          width: 200px; 
+          bottom: 0px; 
+          padding: 15px 10px 10px 15px; 
+          color: #fff; 
+          background-color: rgba(0,0,0,.5);
+          font-family: Arial; 
+          font-size: 16px;
+}    
+
+#tabs-1 > dl > dt { font-size: 16px; font-weight: bold; }
+#tabs-1 > dl > dd { font-size: 14px; margin-left : 5px; margin-bottom: 5px;}	      
+
+#tabs-1 > dl > dt { font-size: 16px; font-weight: bold; }
+#tabs-1 > dl > dd > dl { margin-top : 5px; }	      
+#tabs-1 > dl > dd > dl > dt { font-size: 12px; font-weight: bold; float : left }	      
+#tabs-1 > dl > dd > dl > dd { font-size: 12px; margin-left : 150px; }	
+
+#tabs-2,#tabs-3,#tabs-4,#tabs-5,#tabs-6
+{
+   line-height: 20px;
+}
+
+#intro
+{
+   margin-top: 20px;
+}
+
+#p720
+{
+   color : #F33;
+   font-weight : bold;
+   
+}
+
+ul { margin-top : 10px; list-style-type: none;¡¡}

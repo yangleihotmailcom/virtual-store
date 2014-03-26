@@ -1,0 +1,27 @@
+<?php
+    $errorMessages = $this->formRegister->getMessages();
+    if ( count($errorMessages) > 0 )
+    {
+        echo "<ul class='authenticationErrors'>";    	
+	    foreach($errorMessages as $elementName=>$messages) 
+	    {
+	    	if( is_array($messages))
+	    	{
+	    		//$label = $form->getElement($elementName)->getLabel();
+	    		foreach( $messages as $message )
+	    		{
+	    			//echo '<li>'.$this->escape($label.':'.$message).'</li>' ;
+	    			echo '<li>'.$this->escape($message).'</li>' ;
+	    			break;  //  only one message per element
+	    		}
+	    	}
+	    	if ( is_string($messages))
+	    	{
+	    		echo '<li>'.$this->escape($messages).'</li>' ;
+	    		break;
+	    	}
+		}	
+		echo "</ul>";
+	}
+    echo $this->formRegister;
+ ?>

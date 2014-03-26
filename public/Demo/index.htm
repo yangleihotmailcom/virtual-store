@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+     <title>Demo</title>
+     <link type="text/css" rel="stylesheet" media="screen" href="js/fancybox/jquery.fancybox-1.3.4.css" />
+     <link type="text/css" rel="stylesheet" media="screen" href="js/jquery/css/smoothness/jquery-ui-1.8.20.custom.css" />     
+     <link type="text/css" rel="stylesheet" media="screen" href="css/styles.css" />          
+     <script type="text/javascript" src='js/jquery/js/jquery-1.7.2.min.js'></script>
+     <script src="js/jquery/js/jquery-ui-1.8.20.custom.min.js" type="text/javascript"></script>     
+     <script src="js/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+     
+     <script src="js/frontend.js" type="text/javascript"></script>
+</head>
+
+<body>
+     <div class='main'>
+			<a class="videoLink" youtube="W6hnpvBncDU" caption="Home" ></a>
+			<a class="videoLink" youtube="f_aU45iiYPM" caption="Search Page" ></a>
+			<a class="videoLink" youtube="qHSXtD0LtlE" caption="Log In/Out"></a>
+			<a class="videoLink" youtube="-39e5OjWYOI" caption="Shopping Cart"></a>
+			<a class="videoLink" youtube="zZz5BBI5aTc" caption="Category Landing and Product Details"></a>
+			<a class="videoLink" youtube="CNYvCYtgyb8" caption="Amazon Checkout"></a>			
+			<div class="clear_both"></div>
+     </div>
+     
+  <div id="intro">
+		<ul>
+			<li><a href="#tabs-1">Introducation</a></li>
+			<li><a href="#tabs-2">Home</a></li>
+			<li><a href="#tabs-3">Search Page</a></li>
+			<li><a href="#tabs-4">Log In/Out</a></li>
+			<li><a href="#tabs-5">Shopping Cart</a></li>			
+			<li><a href="#tabs-6">Category Landing and Product Details</a></li>						
+			<li><a href="#tabs-7">Amazon Checkout</a></li>									
+		</ul>
+		<div id="tabs-1">
+		   <dl>
+		      <dt>Summary</dt>
+ 			  <dd><p>This is a web application named "Lei's Virtual Store", in virtual store, there are lots of products you can search/view and add them into cart.<br />
+			   Actually, all data in back-end comes from amazon and increased/updated automatically during your surfing.<br>
+			   It uses the Amazon Product Advertising API to communicate with Amazon.<br />
+			  These videos are in Youtube, please click play button to view them.</p>
+			   
+			   <p style='margin-top:5px;'>Youtube videos have varying degrees of quality, The default value depends on your internet connection, 
+			  change it to <span id='p720'>720p</span> to get high quality video after clicking the play button. </p>
+			   </dd>
+			   <dt>Development environment</dt>
+			   <dd>
+			       <dl>
+			          <dt>OS:</dt>
+			          <dd>Ubuntu 12.04</dd>
+   			          <dt>Apache Web Server:</dt>
+			          <dd>2.2.22</dd>
+   			          <dt>PHP:</dt>
+			          <dd>5.3.10</dd>
+   			          <dt>MYSQL:</dt>
+			          <dd>5.5.22</dd>
+   			          <dt>MVC Framework:</dt>
+			          <dd>Zend Framework 1.11.11</dd>
+   			          <dt>Development Tool:</dt>
+			          <dd>Eclipse/Mysql Workbench</dd>
+   			          <dt>Source Control:</dt>
+			          <dd>Git</dd>
+			       </dl>
+			   </dd>
+		   </dl>
+		</div>
+		<div id="tabs-2">
+		    <div>If you have trouble to view this video, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Home</a></p>
+		    <ul>
+		        <li>Each page contains header, footer, left navigator and page content.</li>
+		        <li>The header contains logo icon, you can go to home page any time by clicking it.</li>
+		        <li>The header contains "shopping Cart", you can view shopping cart content any time when you mouse over it.</li>
+		        <li>The banner shows random products and slide left automatically.</li>
+ 		        <li>In left navigator, it contains search form and categories links, up to 46 categories for the moment and will be increased automatically when new category/product added. </li>
+ 		        <li>In page content, 46 categories are grouped in several sections, 10 items are showed for each category.</li>
+ 		        <li>All images are clickable and a quick view dialog occurs which contains  simple information about the product.</li>
+ 		        <li>You can add it to cart, go to details page or amazon product page in the quick view dialog.</li> 		        
+	      </ul>
+		</div>
+		<div id="tabs-3">
+		    <div>If you have trouble to view this video, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Search Page</a></p>
+		    <ul>
+ 		        <li>In left side, in search form, select a category and enter keywords, you can get maximum 100 items for the keywords.</li>
+ 		        <li>In result page, you can find how many items returned and they are paginated.</li>
+ 		        <li>The search is slow since Amazon Product Advertising API used here ( I will cache the result to speed it up later).  </li>
+ 		        <li>Each search result page contains 10 items, You can click any item to quickly view or add it to cart directly.</li>
+ 		        <li>This video shows you the result when you search keywords "note" and "computer".</li> 		        
+	      </ul>
+		    
+		</div>
+		<div id="tabs-4">
+		    <div>If you have trouble to view this video, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Log In/Out</a></p>
+
+		    <ul>
+ 		        <li>In the header, click "Log in", then you can register and login in popup dialog.</li>
+ 		        <li>This video show you the form validation for registering new user and shopping cart management for the specific user.</li>
+ 		        <li>If you are new user, you need to create new accout, the captcha is used in case auto-register from hacker.</li>
+	      </ul>
+		    
+		</div>
+		<div id="tabs-5">
+		    <div>If you have trouble to view this video, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Shopping Cart</a></p>
+		    <ul>		  
+ 		        <li>In the header, mouse over "shopping cart" and click button "shopping cart" in popup window, you go to shopping cart page.</li>
+ 		        <li>You can update quantity or remove any item, or even empty whole cart.</li>
+ 		        <li>Before removing/emptying, you need to confirm your operation.</li> 		        
+ 		        <li>Ajax(jQuery) is used here, no page transfers and the date is updated in back-end.</li>
+ 		        <li>Almost all images are clickable and the item can be added into cart in popup dialog.</li>
+ 		        <li>The cart is persistent, other user can not see your cart.</li> 		        
+ 		        
+        </ul> 		        
+		</div>
+		<div id="tabs-6">
+		    <div>If you have trouble to view this video, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Category Landing and Product Details</a></p>
+
+		    <ul>		  
+ 		        <li>whatever you do, once you find an item and click it, in popup dialog, click button "More Details", you will go to product details page.</li>
+ 		        <li>Product details page includes more information for the product.</li>
+ 		        <li>Sometimes, product details page is slow if it contains accessories/similar items since extra web service call is made for them by Ajax.</li> 		        
+ 		        <li>In left side, click any category, you will go to category page.</li> 		        
+ 		        <li>The category page shows the items for and only for this category.</li> 		         		        
+        </ul> 		        
+		    
+		</div>		
+    <div id="tabs-7">
+		    <div>If you have trouble to view this video, try the following link to go to Youtube</div>
+		    <p><a href='http://www.youtube.com/v/' target='_blank'>Amazon Checkout</a></p>
+
+		    <ul>		  
+ 		        <li>Add some items into your cart, go to shopping cart page.</li>
+ 		        <li>Click button "Checkout", the login form occurs if you are not login.</li>
+ 		        <li>After login, you may find the more items in your shopping cart, these items are in your private cart you added before.</li>
+ 		        <li>If everything goes well, new window is opened and you go to amazon shopping cart successfully.</li>
+ 		        <li>Sometimes, the item was expired/insufficient, an error message maybe pop-up, you can click "continue" button to ignore it, and item does not exist in amazon shopping cart.</li> 		        
+ 		        <li>Click button "continue" and go ahead in amazon shopping cart page.</li>
+        </ul> 		        
+		    
+		</div>				
+  </div>
+</body>
+</html>

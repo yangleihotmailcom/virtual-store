@@ -1,0 +1,364 @@
+<div id='itemDetails'>
+<?php 
+   $item = $this->product[0] ;
+
+   $asin = $item['ASIN'];
+   $largeImage = $item['LargeImage'];
+   $amazonURL = $item['DetailPageURL'];
+      
+   $title = $item['Title'];
+   $altTitle = $title ;
+   if ( strlen( $title ) > 200 ) $altTitle = substr($title, 0, 200).'...';
+   
+   $img = $largeImage;
+   $largeImageExits = true ;
+   if ( $img == '') 
+   { 
+   	     $img = $item['MediumImage'];
+   	     $largeImageExits = false;
+   }
+   if ( $img == '') $img = $item['SmallImage'];
+   
+   if ( $img == '' ) $imgHTML = '<div class="itemDetailsNoImage"><span>No image</span></div>';
+   else
+   {  $largeImageView = '';
+      if ( $largeImageExits ) $largeImageView = "<br /><span>Large Image.</span>"; 
+   	  $imgHTML = "<div class='itemDetailsImage' largeImage='$largeImage'><img src='$img' alt='$altTitle' />$largeImageView</div>";
+   }
+   
+//    $this->view->product = $product;
+//    $this->view->offer = $offers;
+//    $this->view->accessories = $accessories;
+//    $this->view->editorialReviews = $editorialReviews;
+//    $this->view->feature = $feature;
+//    $this->view->similars = $similars;
+//    $this->view->tracks = $tracks;
+?>
+    <div id="itemDetailsHeader">   
+	   <div id="itemDetailsMediumImageContainer" >
+	      <?php  echo $imgHTML ;?>
+	   </div>
+	   
+	   <div id="itemDetailsPrimaryInfo">
+	     <?php  
+	          echo "<div class='quickviewTitle'>$title</div>";
+	           
+	           echo '<dl>';
+                  
+            // Author      
+                  $keys = array('Actor','Creator','Author','Artist');
+                  foreach ( $keys as $key ) {
+            	     $value = $item[$key];
+            	     if ( strlen( $value ) == 0 ) continue;
+            	     echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";	
+                  }
+                  
+            // Price
+                  $key = 'Amount';
+                  $listPrice = $item[$key];
+                  if ( $listPrice) $listPrice = number_format($listPrice/100, 2);
+
+                  $amazonPrice = '';
+                  $OfferListingId = '';
+                  $availability = '';
+                  $condition = '';
+                  $price = '';
+                  if ( count($this->offer) > 0 )
+                  {
+                  	$offer = $this->offer[0]; 
+                  	$amazonPrice = number_format($offer['Price']/100, 2);
+                  	$OfferListingId = $offer['OfferListingId']; 
+                  	$availability = $offer['Availability'];
+                  	$condition = $offer['Condition'];                  	                  	
+                  }
+                  
+                  if ( $listPrice && $amazonPrice )
+                  {
+                  	  if ( $listPrice > $amazonPrice )
+                  	       $price = "<span class='listPrice'>\$$listPrice</span> <span>\$$amazonPrice</span>";
+                  	  else
+                 	  	   $price = "<span>\$$listPrice</span>";
+                  }
+                  
+                  if ( $listPrice && ! $amazonPrice)
+                  {
+                  	$price = "<span>\$$listPrice</span>";
+                  }
+                  
+                  if ( ! $listPrice && $amazonPrice)
+                  {
+                  	$price = "<span>\$$amazonPrice</span>";                  	
+                  }
+                  
+                  if ( $price )
+                  echo "<dt class='quickviewItemTitle'>Price:</dt><dd>$price $condition</dd>";
+                  
+              // Manufacturer
+                  $keys = array('Studio','Label','Manufacturer');
+                  foreach ( $keys as $key ) {
+                  	$value = $item[$key];
+                  	if ( strlen( $value ) == 0 ) continue;
+                  	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+                  	break;
+                  }
+                  
+              // Department
+                  $key = 'Department' ;
+                  $value = $item[$key];
+                  if ( strlen( $value ) != 0  ) 
+                  	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+             
+                  
+              // Format
+                  $keys = array('Format','Genre');
+                  foreach ( $keys as $key ) {
+                  	$value = $item[$key];
+                  	if ( strlen( $value ) == 0 ) continue;
+                  	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+                  }
+              // SalesRank
+                  $key = 'SalesRank';
+                  $value = $item[$key];
+                  if ( strlen( $value ) != 0 ) 
+                     echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+                  
+              // Number    
+                  $keys = array('NumberOfItems','NumberOfPages','NumberOfDiscs');
+                  foreach ( $keys as $key ) {
+                  	$value = $item[$key];
+                  	if ( strlen( $value ) == 0 ) continue;
+                  	echo "<dt class='quickviewItemTitle'>$key:</dt><dd>$value</dd>";
+                  }
+
+              echo "</dl>";
+           ?>
+
+          <div style="clear:both;"></div>
+          <?php
+          // Aailability
+            if ($availability)
+              	echo "<div class='avail'>$availability</div>";
+            
+             if ( $price ) {
+             	$num = 0 ;
+             	if ( count( $this->itemInCart ) > 0 ) $num = $this->itemInCart[0]['qty']; 
+          	    echo "<div style='padding-left:200px;margin-top:20px;'>";
+          	    echo "<span id='itemDetailsAddToCart' asin='$asin'>Add to Cart</span>";
+          	    echo "<span><span id='itemDetailsNumOfItemsInCart'>$num</span> item(s) in your cart</span>";
+          	    echo "</div>";
+             }
+          ?>
+	   </div>
+	</div>
+	<div style='clear: both; height: 15px;'></div>
+	
+	<div id="itemDetailsMoreInfo">
+	  <?php
+	    // more Attributs
+	     $moreAttrNames = array(	
+			'Brand' => '' ,
+			'Color' => '' ,
+			'SKU' => '' ,
+			'EAN' => '' ,
+			'Model' => '' ,
+			'PackageQuantity' => '' ,
+			'UPC' => '' ,
+			'Warranty' => '' ,
+			'MPN' => '' ,
+			'PartNumber' => '' ,
+			'ItemPartNumber' => '' ,
+			'IsAdultProduct' => '' ,
+			'PublicationDate' => '' ,
+			'ISBN' => '' ,
+			'IsEligibleForTradeIn' => '' ,
+			'ReleaseDate' => '' ,
+			'RunningTime' => '' ,
+			'AspectRatio' => '' ,
+			'AudienceRating' => '' ,
+			'HardwarePlatform' => '' ,
+			'IsAutographed' => '' ,
+			'IsMemorabilia' => '' ,
+			'OperatingSystem' => '' ,
+			'Edition' => '' ,
+			'EISBN' => '' ,
+			'Size' => '' ,
+			'ESRBAgeRating' => '' ,
+			'Platform' => '' ,
+         );
+	     $itemMoreAttrs = array_intersect_key($item , $moreAttrNames); // print_r($itemMoreAttrs);exit();  
+	     $itemMoreAttrs = array_diff_assoc($itemMoreAttrs, $moreAttrNames); // print_r($itemMoreAttrs);exit();
+	     
+	     $firstCol = round(count($itemMoreAttrs)/2); 
+	     $secondCol = count($itemMoreAttrs) - $firstCol ; 
+	     $cols = array( $firstCol, $secondCol); 
+	     if ( $firstCol != 0 )
+	     {
+	     	echo '<div id="itemDetailsMoreAttr">';
+	     	echo '<p class="itemDetailsSectionTitle">More Attributes</p>';
+	     	
+	     	$offset = 0 ;
+	     	foreach ( $cols as $col )
+	     	{
+	     		$attrs = array_slice($itemMoreAttrs, $offset, $col); 
+	     		echo '<dl>';
+	     		foreach ( $attrs as $name => $value )
+	     			echo "<dt class='quickviewItemTitle'>$name:</dt><dd>$value</dd>";
+	     		echo '</dl>';
+	     		$offset += $col;
+	     	}
+	     	echo '</div>';
+	     	echo '<div style="clear: both; height: 15px;"></div>';
+	     }
+	   // Features
+	     $feature = $this->feature;
+	     if ( count( $feature ) > 0 )
+	     {
+	     	echo '<div id="itemDetailsFeature">';
+	     	echo '<p class="itemDetailsSectionTitle">Feature</p>';	     	
+	     	echo '<dl>';
+	     	$i = 1 ;
+	     	foreach ( $feature as $value) 
+	     	{
+	     		$featureValue = $value['feature'];
+	     		echo "<dt>$i.</dt><dd>$featureValue</dd></li>";
+	     		$i++;
+	     	}  
+	     	echo '</dl>';
+	     	echo '</div>';
+	     	echo '<div style="clear: both; height: 15px;"></div>';
+	     }
+	   // tracks
+	     $tracks= $this->tracks;  
+	     if ( count( $tracks ) > 0 )
+	     {
+	     	echo '<div id="itemDetailsTracks">';
+	     	echo '<p class="itemDetailsSectionTitle">Tracks</p>';
+	     	echo '<dl>';
+	     	$i = 1 ;
+	     	foreach ( $tracks as $track )
+	     	{
+	     		$value = $track['title'];
+	     		echo "<dt>$i.</dt><dd>$value</dd>";
+	     		$i++;
+	     	}
+	     	echo '</dl>';
+	     	echo '</div>';
+	     	echo '<div style="clear: both; height: 15px;"></div>';
+	     }
+	     
+	     // Editoral Reviews
+	     $editorialReviews= $this->editorialReviews;
+	     if ( count( $editorialReviews ) > 0 )
+	     {
+	     	echo '<div id="itemDetailsEditorialReviews">';
+	     	echo '<p class="itemDetailsSectionTitle">Editorial Reviews</p>';
+	     	
+	     	echo '<div id="editorialReviewTabs">';
+	     	
+	     	echo '<ul>';
+	     	$i = 1 ;
+	     	foreach ( $editorialReviews as $editorialReview )
+	     	{
+	     		$source = $editorialReview['source'];
+	     //		$content = $editorialReview['content'];
+	            
+	     		echo "<li><a href='#editorialReviews-$i'>$source</a></li>";
+	     		$i++;
+	     	}
+	     	echo '</ul>';
+	     	$i = 1 ;
+	     	foreach ( $editorialReviews as $editorialReview )
+	     	{
+	     		//$source = $editorialReview['source'];
+	     		$content = nl2br($editorialReview['content']);
+	     		echo "<div id='editorialReviews-$i'><p>$content</p></div>";
+	     		$i++;
+	     	}
+	     	echo '</div>';
+	     	echo '</div>';
+	     	echo '<div style="clear: both; height: 15px;"></div>';
+	     }
+         
+	     // Accessories  
+	     $accessories = $this->accessories;
+	     if ( count($accessories) > 0 )
+	     {
+	     	echo '<div id="itemDetailsAccessories">';
+	     	echo '<p class="itemDetailsSectionTitle">Accessories</p>';
+	     	echo '<div class="itemDetailsViewer">';
+	     	  echo '<div class="itemDetailsList">';
+	     	        $i = 1 ;
+	     	        foreach ( $accessories as $accessory )
+	     	        {
+	     	        	if ( $i > 5 ) break;
+	     	        	$asin = $accessory['asin'];	     	        	
+	     		        $src = '/images/ajax-loader.gif';
+	     	        	$title = $accessory['title'];
+	     	        	$formatedTitle = $title;
+
+	     	        	if ( strlen($formatedTitle) > 100 ) $formatedTitle = substr($formatedTitle, 0 , 100 ).'...';
+	     	        	$title = htmlspecialchars($title, ENT_QUOTES ); //print_r( $title );exit();
+                        $$formatedTitle = htmlspecialchars($formatedTitle,ENT_QUOTES);
+	     	        	
+       		     		echo "<div class='itemDetailsItemContainer' asin='$asin'>";
+     	        	        echo "<img src='$src' title='$title' alt='$formatedTitle' /><br />";
+// 	     	        	    else echo '<div class="itemDetailsNoImage"><span>No Image</span></div>';
+	     	        	    echo '<div class="itemDetailsItemTitle"><span>'.$formatedTitle.'</span></div>';
+	     	        	echo '</div>';
+	     	        	$i++ ;
+	     	        }
+	     	  echo '</div>';
+	     	echo '</div>';
+	     	echo '</div>';
+	     	echo '<div style="clear: both; height: 15px;"></div>';
+	     }
+
+	     // Similars
+	     $similars = $this->similars;
+	     if ( count($similars) > 0 )
+	     {
+	     	echo '<div id="itemDetailsSimilars">';
+	     	echo '<p class="itemDetailsSectionTitle">Similar Items</p>';
+	     	echo '<div class="itemDetailsViewer">';
+	     	echo '<div class="itemDetailsList">';
+	     	$i = 1 ;
+	     	foreach ( $similars as $similar )
+	     	{
+	     		if ( $i > 5 ) break;
+	     		$asin = $similar['asin'];	     		
+	     		$src = '/images/ajax-loader.gif';
+	     		$title = $similar['title'];
+	     		$formatedTitle = $title;
+	     		if ( strlen($formatedTitle) > 100 ) $formatedTitle = substr($formatedTitle, 0 , 100 ).'...';
+	     		$title = htmlspecialchars($title, ENT_QUOTES ); //print_r( $title );exit();
+	     		$$formatedTitle = htmlspecialchars($formatedTitle,ENT_QUOTES);
+	     
+	     		echo "<div class='itemDetailsItemContainer' asin='$asin'>";
+                echo "<img src='$src' title='$title' alt='$formatedTitle' />";
+// 	     		else echo '<div class="itemDetailsNoImage"><span>No Image</span></div>';
+        	    echo '<div class="itemDetailsItemTitle"><span>'.$formatedTitle.'</span></div>';
+	     		echo '</div>';
+	     		$i++;
+	     	}
+	     	echo '</div>';
+	     	echo '</div>';
+	     	echo '</div>';
+	     	echo '<div style="clear: both; height: 15px;"></div>';
+	     }
+	     // LegalDisclaimer
+	     
+	     $legalDisclaimer = $item['LegalDisclaimer'];
+	     if ( $legalDisclaimer != '' )
+	     {  $legalDisclaimer = nl2br($legalDisclaimer);
+	     	echo '<div id="itemDetailsLegalDisclaimer">';
+		     	echo '<p class="itemDetailsSectionTitle">Legal Disclaimer</p>';
+		     	echo "<div>$legalDisclaimer</div>";
+	     	echo '</div>';
+	     	echo '<div style="clear: both; height: 15px;"></div>';	     	
+	     }
+	  ?> 
+	</div>
+	   <script type="text/javascript">
+        var categoryName = '<?php echo $item['ProductGroup'] ; ?>'; 
+   </script>
+</div>
